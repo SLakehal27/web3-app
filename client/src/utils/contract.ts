@@ -22,3 +22,18 @@ export async function setUsernameFromContract(address: Address, username: string
     await contract.methods.addUser(address, username).send({from: address})
 }
 
+export async function getWatchlistFromContract(address: Address) {
+    console.log(await contract.methods.getWatchlist(address).call({from: address}))
+}
+
+export async function addToWatchlistFromContract(address: Address, idMovie: string) {
+    await contract.methods.addToWatchlist(address, idMovie).send({from: address})
+}
+
+export async function getReviewsFromContract(address: Address) {
+    console.log(await contract.methods.getReviews(address).call({from: address}))
+}
+
+export async function addReviewFromContract(address: Address, review: {idMovie: string, rating: number}) {
+    await contract.methods.addReview(address, review).send({from: address, gas: "200000"});
+}

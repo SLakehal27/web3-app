@@ -19,6 +19,8 @@ contract User {
 	}
 
 	mapping (address => UserInfo) public wallets;
+	mapping (address => mapping(string => bool)) public reviewedMovies;
+
 
 	function addUser(address wallet, string memory username) public {
 		wallets[wallet].username = username;
@@ -30,7 +32,7 @@ contract User {
 		return username;
 	}
 
-	function addReviewToUser(address wallet, Review memory review) public {
+	function addReview(address wallet, Review memory review) public {
 		UserInfo storage user = wallets[wallet];
 
 		// use revert instead?
@@ -52,7 +54,7 @@ contract User {
 		}
 	}
 
-	function addMovieToWatchlist(address wallet, string memory idMovie) public {
+	function addToWatchlist(address wallet, string memory idMovie) public {
 		UserInfo storage user = wallets[wallet];
         
         for (uint i = 0; i < user.reviews.length; i++) {
@@ -68,5 +70,17 @@ contract User {
         }
 
         user.idMoviesToWatch.push(idMovie);
+	}
+
+	function getWatchlist(address wallet) public view returns(string[] memory) {
+		string[] memory watchlist = wallets[wallet].idMoviesToWatch;
+
+		return watchlist;
+	}
+
+	function getReviews(address wallet) public view returns(Review[] memory) {
+		Review[] memory reviews = wallets[wallet].reviews;
+
+		return reviews;
 	}
 }
