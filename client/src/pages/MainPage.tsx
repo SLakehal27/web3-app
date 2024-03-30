@@ -22,7 +22,7 @@ export function MainPage() {
     const accounts = await web3.eth.getAccounts();
     const address: Address = accounts[0];
 
-    setUsernameFromContract(address, "mathieu");
+    setUsernameFromContract(address, "mathieu, is amazing");
   };
 
   const getUsername = async () => {
