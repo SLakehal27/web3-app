@@ -32,4 +32,10 @@ contract MetaCoin {
 	function getBalance(address addr) public view returns(uint) {
 		return balances[addr];
 	}
+
+	function test() public pure returns(string memory) {
+		string memory text = 'le tout fonctionne';
+
+		return text;
+	}
 }
