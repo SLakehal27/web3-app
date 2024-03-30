@@ -19,6 +19,6 @@ export async function getUsernameFromContract(address: Address) {
 }
 
 export async function setUsernameFromContract(address: Address, username: string) {
-    await contract.methods.saveUser(address, username).send({from: address})
+    await contract.methods.addUser(address, username).send({from: address})
 }
 
