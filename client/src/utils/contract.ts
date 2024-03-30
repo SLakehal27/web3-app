@@ -14,6 +14,11 @@ export const contract = new web3.eth.Contract(
   contractAddress,
 )
 
-export async function methodForTesting() {
-    console.log(await contract.methods.test().call())
+export async function getUsernameFromContract(address: Address) {
+    console.log(await contract.methods.getUsername(address).call({from: address}))
 }
+
+export async function setUsernameFromContract(address: Address, username: string) {
+    await contract.methods.saveUser(address, username).send({from: address})
+}
+
