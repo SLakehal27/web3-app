@@ -9,8 +9,8 @@ import { Header } from "./components/Header";
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/review/:id" element={<ReviewPage />} />

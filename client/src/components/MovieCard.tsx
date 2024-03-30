@@ -6,14 +6,14 @@ export function MovieCard({ movie }: { movie: Movie }) {
     <div>
       <Card className="m-10 flex flex-col w-[250px] items-center justify-center hover:scale-110 transition">
         <CardHeader>
-          <h1>{movie.title || "titre"}</h1>
+          <h1>{movie.title}</h1>
         </CardHeader>
         <CardContent>
-          <p>{movie.description || "desc"}</p>
+          <p>{movie.description}</p>
           <p>Number of ppl</p>
         </CardContent>
         <CardFooter>
-          <p>{movie.rating || "rating"} </p>
+          <p>{movie.rating} </p>
         </CardFooter>
       </Card>
     </div>

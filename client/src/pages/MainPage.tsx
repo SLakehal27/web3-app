@@ -17,6 +17,7 @@ import {
 } from "../components/ui/card";
 import { MovieCard } from "../components/MovieCard";
 import { Movie } from "../interfaces/Movie";
+import { Link } from "react-router-dom";
 
 export function MainPage() {
   const setUsername = async () => {
@@ -63,48 +64,56 @@ export function MainPage() {
 
   const mockMovies = [
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
       rating: 69,
     },
     {
+      id: "5678",
       title: "Spiderman: Into The Spiderverse",
       description:
         "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
       rating: 9.5,
     },
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
       rating: 69,
     },
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
       rating: 69,
     },
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
       rating: 69,
     },
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
       rating: 69,
     },
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
       rating: 69,
     },
     {
+      id: "1234",
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
@@ -118,8 +127,12 @@ export function MainPage() {
         <TopRatedCarousel movies={mockMovies} />;
         <h1 className="font-bold text-3xl">Movies to watch!</h1>
         <div className="grid grid-cols-5">
-          {mockMovies.map((movie: Movie) => {
-            return <MovieCard movie={movie} />;
+          {mockMovies.map((movie) => {
+            return (
+              <Link to={`review/${movie.id}`}>
+                <MovieCard movie={movie} />
+              </Link>
+            );
           })}
         </div>
       </div>
