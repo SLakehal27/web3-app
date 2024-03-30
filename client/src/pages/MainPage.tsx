@@ -1,11 +1,3 @@
-import { Card, CardContent } from "../components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../components/ui/carousel";
 import {
   addReviewFromContract,
   addToWatchlistFromContract,
@@ -15,7 +7,17 @@ import {
   setUsernameFromContract,
   web3,
 } from "../utils/contract";
+import { TopRatedCarousel } from "../components/TopRatedCarousel";
 import { Address } from "web3";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "../components/ui/card";
+import { MovieCard } from "../components/MovieCard";
+import { Movie } from "../interfaces/Movie";
+import { Link } from "react-router-dom";
 
 export function MainPage() {
   const setUsername = async () => {
@@ -60,56 +62,79 @@ export function MainPage() {
     addToWatchlistFromContract(address, "123");
   };
 
+  const mockMovies = [
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+    {
+      id: "5678",
+      title: "Spiderman: Into The Spiderverse",
+      description:
+        "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+      rating: 9.5,
+    },
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+    {
+      id: "1234",
+      title: "Oppenheimer",
+      description:
+        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      rating: 69,
+    },
+  ];
   return (
     <>
-      <Carousel
-        opts={{
-          align: "start",
-          slidesToScroll: "auto",
-        }}
-        className="w-full max-w-sm m-12"
-      >
-        <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-3xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-
-      <div>
-        <h1 className="text-emerald-300" onClick={setUsername}>
-          Set the username on the contract
-        </h1>
-
-        <h1 className="text-emerald-300" onClick={getUsername}>
-          Get the username from contract
-        </h1>
-
-        <h1 className="text-emerald-300" onClick={addToWatchlist}>
-          Add to watchlist
-        </h1>
-
-        <h1 className="text-emerald-300" onClick={getWatchlist}>
-          Get the watchlist
-        </h1>
-
-        <h1 className="text-emerald-300" onClick={addReview}>
-          Add review
-        </h1>
-
-        <h1 className="text-emerald-300" onClick={getReviews}>
-          Get the reviews
-        </h1>
+      <div className="flex flex-col items-center p-20">
+        <h1 className="font-bold text-3xl">Top rated movies!</h1>
+        <TopRatedCarousel movies={mockMovies} />;
+        <h1 className="font-bold text-3xl">Movies to watch!</h1>
+        <div className="grid grid-cols-5">
+          {mockMovies.map((movie) => {
+            return (
+              <Link to={`review/${movie.id}`}>
+                <MovieCard movie={movie} />
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </>
   );

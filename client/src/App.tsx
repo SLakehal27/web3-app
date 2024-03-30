@@ -4,16 +4,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { MovieListPage } from "./pages/MovieListPage";
+import { Header } from "./components/Header";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/review/:id" element={<ReviewPage />} />
-        <Route path="/movielist" element={<MovieListPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/review/:id" element={<ReviewPage />} />
+          <Route path="/movielist" element={<MovieListPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
