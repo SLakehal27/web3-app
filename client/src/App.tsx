@@ -1,36 +1,20 @@
 import React from "react";
 import "./App.css";
-import { getUsernameFromContract, setUsernameFromContract, web3 } from "./utils/contract";
-import { Address } from "web3";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { MainPage } from "./pages/MainPage";
+import { ReviewPage } from "./pages/ReviewPage";
+import { MovieListPage } from "./pages/MovieListPage";
 
 function App() {
-
-  const setUsername = async () => {
-    const accounts = await web3.eth.getAccounts()
-    const address: Address = accounts[0]
-
-    setUsernameFromContract(address, "mathieu")
-  };
-
-  const getUsername = async () => {
-    const accounts = await web3.eth.getAccounts()
-    const address: Address = accounts[0]
-
-    getUsernameFromContract(address)
-  };
-
   return (
-    <div>
-      <h1 className="text-emerald-300" onClick={setUsername}>
-        Set the username on the contract
-      </h1>
-
-      <h1 className="text-emerald-300" onClick={getUsername}>
-        Get the username from contract
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/review/:id" element={<ReviewPage />} />
+        <Route path="/movielist" element={<MovieListPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 
 export default App;
