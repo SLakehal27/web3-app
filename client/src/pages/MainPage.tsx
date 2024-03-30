@@ -62,64 +62,36 @@ export function MainPage() {
     addToWatchlistFromContract(address, "123");
   };
 
-  const mockMovies = [
+  const mockMovies: Movie[] = [
     {
       id: "1234",
+      rank: 1,
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
+      overallRating: 10,
+      rating: 9.8,
     },
     {
       id: "5678",
+      rank:2,
       title: "Spiderman: Into The Spiderverse",
       description:
         "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+      overallRating: 10,
       rating: 9.5,
     },
     {
       id: "1234",
+      rank: 3,
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
-    },
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
-    },
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
-    },
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
-    },
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
-    },
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      rating: 69,
+      overallRating: 10,      
+      rating: 7,
     },
   ];
+
   return (
     <>
       <div className="flex flex-col items-center p-20">
