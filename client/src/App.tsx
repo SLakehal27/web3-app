@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {window.location.pathname !== "/" && <Header />}
+        {window.location.pathname !== "/" ? <Header /> : <></>}
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
           <Route path="/main" element={<MainPage />} />
