@@ -5,14 +5,16 @@ import { MainPage } from "./pages/MainPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { MovieListPage } from "./pages/MovieListPage";
 import { Header } from "./components/Header";
+import RegistrationPage from "./pages/RegistrationPage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {window.location.pathname !== "/" && <Header />}
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<RegistrationPage />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/movielist" element={<MovieListPage />} />
         </Routes>

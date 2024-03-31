@@ -6,7 +6,7 @@ export function Header() {
   return (
     <header className="bg-purple-200">
       <div className="flex justify-between items-center p-2">
-        <Link to="/">
+        <Link to="/main">
           <img
             src={Logo}
             alt="logo"
