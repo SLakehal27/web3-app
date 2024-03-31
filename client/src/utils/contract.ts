@@ -49,7 +49,7 @@ export async function getAllMoviesFromContract(): Promise<Movie[]> {
 }
 
 
-export async function getTopRatedFromContract() {
+export async function getTopRatedFromContract(): Promise<Movie[]> {
     return await contract.methods.getTopRated().call()
 }
 
