@@ -21,7 +21,7 @@ export function TopRatedCarousel({ movies }: { movies: Movie[] | null }) {
       <CarouselContent>
         {movies?.map((movie: Movie, index: number) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center" key={index}>
               <p className="font-bold mt-6 text-3xl">
                 {movie.averageRating.toString()}
               </p>
