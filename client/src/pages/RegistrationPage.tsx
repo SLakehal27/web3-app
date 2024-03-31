@@ -13,7 +13,6 @@ export default function RegistrationPage() {
     const accounts = await web3.eth.getAccounts();
     const address: Address = accounts[0];
 
-    console.log(username)
     await addUserFromContract(address, username);
     navigate('/main')
   };
