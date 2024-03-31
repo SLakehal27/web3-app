@@ -18,12 +18,24 @@ contract User {
 		string[] idMoviesToWatch;
 	}
 
+		struct Movie {
+		string id;
+		string name;
+		string description;
+		uint releaseYear;
+		uint averageRating;
+		uint numberOfRatings;
+	}
+
 	mapping (address => UserInfo) public wallets;
-	mapping (address => mapping(string => bool)) public reviewedMovies;
+	address[] addressArray;
+	mapping (string => Movie) public movies;
+	string[] idArray;
 
 
-	function addUser(address wallet, string memory username) public {
+	function addUser(address wallet, string memory username) public { // modifié
 		wallets[wallet].username = username;
+		addressArray.push(wallet);
 	}
 
 	function getUsername(address wallet) public view returns(string memory) {
@@ -43,6 +55,7 @@ contract User {
         }
 
 		user.reviews.push(review);
+		movies[review.idMovie].numberOfRatings++;
 
 		for (uint i = 0; i < user.idMoviesToWatch.length; i++) {
 			if (keccak256(bytes(user.idMoviesToWatch[i])) == keccak256(bytes(review.idMovie))) {
@@ -82,5 +95,73 @@ contract User {
 		Review[] memory reviews = wallets[wallet].reviews;
 
 		return reviews;
+	}
+
+	function getReviewsForMovie(string memory movieId) public view returns(Review[] memory) {
+		Review[] memory movieReviews;
+        for (uint256 i = 0; i < addressArray.length; i++) {
+			Review[] memory reviews = wallets[addressArray[i]].reviews;
+			for (uint256 j = 0; j < addressArray.length; j++) {
+				if (keccak256(bytes(movieId)) == keccak256(bytes(reviews[j].idMovie))) {
+
+					movieReviews[movieReviews.length - 1] = reviews[j];
+				}
+			}
+        }
+		return movieReviews;
+	}
+
+	function getMovie(string memory id) public view returns(Movie memory) {
+		return movies[id];
+	}
+
+	function getAllMovies() public view returns(Movie[] memory) {
+		Movie[] memory allMovies = new Movie[](idArray.length);
+        for (uint256 i = 0; i < idArray.length; i++) {
+            allMovies[i] = movies[idArray[i]];
+        }
+		return allMovies;
+	}
+
+	function getTopRated() public view returns(Movie[] memory){
+		Movie[] memory topRated;
+		uint totalRatings;
+        for (uint256 i = 0; i < idArray.length; i++) {
+            totalRatings += movies[idArray[i]].averageRating;
+        }
+		totalRatings /=	idArray.length;
+		for (uint256 i = 0; i < idArray.length; i++) {
+            if(totalRatings < movies[idArray[i]].averageRating){
+				topRated[i] = movies[idArray[i]];
+			}
+        }
+		return topRated;
+	}
+
+	function addMovie(string memory id, Movie memory movie) public {
+		movies[id] = movie;
+		idArray.push(id);
+	}
+
+	function deleteMovie(string memory id) public {
+		delete(movies[id]);
+		    for (uint i = 0; i < idArray.length; i++) {
+				if (keccak256(bytes(idArray[i])) == keccak256(bytes(id))) {
+					idArray[i] = idArray[idArray.length - 1];
+					idArray.pop();
+					break;
+            }
+        }
+	}
+
+	function calculateRating(string memory id) public view {
+		Movie memory movie = movies[id];
+		Review[] memory reviews = getReviewsForMovie(id);
+		uint movieRatings;
+
+		for (uint256 i = 0; i < reviews.length; i++) {
+            movieRatings += reviews[i].rating;
+        }
+		movie.averageRating = movieRatings / reviews.length;
 	}
 }
