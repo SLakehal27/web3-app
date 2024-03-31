@@ -18,7 +18,7 @@ contract User {
 		string[] idMoviesToWatch;
 	}
 
-		struct Movie {
+	struct Movie {
 		string id;
 		string name;
 		string description;
@@ -56,6 +56,7 @@ contract User {
 
 		user.reviews.push(review);
 		movies[review.idMovie].numberOfRatings++;
+		calculateRating(review.idMovie);
 
 		for (uint i = 0; i < user.idMoviesToWatch.length; i++) {
 			if (keccak256(bytes(user.idMoviesToWatch[i])) == keccak256(bytes(review.idMovie))) {
@@ -138,12 +139,32 @@ contract User {
 		return topRated;
 	}
 
-	function addMovie(string memory id, Movie memory movie) public {
+	function getAverageRating(string memory idMovie) public view returns(uint) {
+		uint averageRating = movies[idMovie].averageRating;
+
+		return averageRating;
+	}
+
+	// The functions below are private and are therefore only used within the context of the contract itself
+
+	function calculateRating(string memory id) private view {
+		Movie memory movie = movies[id];
+		Review[] memory reviews = getReviewsForMovie(id);
+		uint movieRatings;
+
+		for (uint256 i = 0; i < reviews.length; i++) {
+            movieRatings += reviews[i].rating;
+        }
+
+		movie.averageRating = movieRatings / reviews.length;
+	}
+
+	function addMovie(string memory id, Movie memory movie) private {
 		movies[id] = movie;
 		idArray.push(id);
 	}
 
-	function deleteMovie(string memory id) public {
+	function deleteMovie(string memory id) private {
 		delete(movies[id]);
 		    for (uint i = 0; i < idArray.length; i++) {
 				if (keccak256(bytes(idArray[i])) == keccak256(bytes(id))) {
@@ -152,16 +173,5 @@ contract User {
 					break;
             }
         }
-	}
-
-	function calculateRating(string memory id) public view {
-		Movie memory movie = movies[id];
-		Review[] memory reviews = getReviewsForMovie(id);
-		uint movieRatings;
-
-		for (uint256 i = 0; i < reviews.length; i++) {
-            movieRatings += reviews[i].rating;
-        }
-		movie.averageRating = movieRatings / reviews.length;
 	}
 }
