@@ -16,8 +16,8 @@ export async function getUsernameFromContract(address: Address) {
     return await contract.methods.getUsername(address).call({from: address})
 }
 
-export async function setUsernameFromContract(address: Address, username: string) {
-    await contract.methods.addUser(address, username).send({from: address})
+export async function addUserFromContract(address: Address, username: string) {
+    await contract.methods.addUser(address, username).send({from: address, gas: "200000"})
 }
 
 export async function getWatchlistFromContract(address: Address): Promise<Movie[]> {

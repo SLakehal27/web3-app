@@ -18,7 +18,7 @@ export function ReviewPage() {
     const address: Address = accounts[0];
 
     await addToWatchlistFromContract(address, id);
-    navigate('/')
+    navigate('/main')
   };
 
   const addReview = async () => {
@@ -30,7 +30,7 @@ export function ReviewPage() {
     const address: Address = accounts[0];
 
     await addReviewFromContract(address, { idMovie: id, rating });
-    navigate('/')
+    navigate('/main')
   };
 
   const [rating, setRating] = useState(5);

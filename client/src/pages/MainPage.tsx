@@ -7,7 +7,6 @@ import {
   getUsernameFromContract,
   getWatchlistFromContract,
   removeFromWatchlistFromContract,
-  setUsernameFromContract,
   web3,
 } from "../utils/contract";
 import { TopRatedCarousel } from "../components/TopRatedCarousel";
@@ -26,48 +25,6 @@ import { Button } from "../components/ui/button";
 import { watch } from "fs";
 
 export function MainPage() {
-  // const setUsername = async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const address: Address = accounts[0];
-
-  //   setUsernameFromContract(address, "mathieu, is amazing");
-  // };
-
-  // const getUsername = async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const address: Address = accounts[0];
-
-  //   getUsernameFromContract(address);
-  // };
-
-  // const getReviews = async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const address: Address = accounts[0];
-
-  //   getReviewsFromContract(address);
-  // };
-
-  // const addReview = async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const address: Address = accounts[0];
-
-  //   addReviewFromContract(address, { idMovie: "123", rating: 4 });
-  // };
-
-  // const getWatchlist = async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const address: Address = accounts[0];
-
-  //   getWatchlistFromContract(address);
-  // };
-
-  // const addToWatchlist = async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   const address: Address = accounts[0];
-
-  //   addToWatchlistFromContract(address, '123');
-  // };
-
   const removeFromWatchlist = async (id: string) => {
     const accounts = await web3.eth.getAccounts();
     const address: Address = accounts[0];
