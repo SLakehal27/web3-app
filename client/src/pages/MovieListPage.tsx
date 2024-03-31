@@ -63,7 +63,7 @@ const TableView: FC<{ data: Movie[] }> = ({ data }) => {
               key={index}
             >
               <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {index}
+                {index + 1}
               </td>
               <td className="py-4 px-6">{movie.title}</td>
               <td className="py-4 px-6">{movie.overallRating}</td>
