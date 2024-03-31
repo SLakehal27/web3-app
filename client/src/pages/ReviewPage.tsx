@@ -45,7 +45,7 @@ export function ReviewPage() {
           <p>{rating}</p>
         </div>
         <div className="flex gap-6 mt-5">
-          <Link to="/">
+          <Link to="/main">
             <Button className="bg-indigo-500 w-48 text-lg hover:bg-indigo-800 hover:scale-110 transition">
               Add rating
             </Button>
