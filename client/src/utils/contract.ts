@@ -1,11 +1,9 @@
 import Web3, { Address } from 'web3'
 import json from './contracts.json'
+import { Movie } from '../interfaces/Movie';
 
 const contractAbi = json.abi;
 const contractAddress = json.networks[5777].address;
-
-console.log(contractAddress)
-console.log(contractAbi)
 
 export const web3 = new Web3("http://localhost:7545")
 
@@ -42,7 +40,7 @@ export async function getReviewsForMovieFromContract(moveId: string) {
     return await contract.methods.getReviewsForMovie(moveId).call()
 }
 
-export async function getMovieFromContract(moveId: string) {
+export async function getMovieFromContract(moveId: string): Promise<Movie> {
     return await contract.methods.getMovie(moveId).call()
 }
 

@@ -20,7 +20,7 @@ contract User {
 
 	struct Movie {
 		string id;
-		string name;
+		string title;
 		string description;
 		uint releaseYear;
 		uint averageRating;

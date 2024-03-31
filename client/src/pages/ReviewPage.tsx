@@ -2,19 +2,32 @@ import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { useParams } from "react-router-dom";
 import { Movie } from "../interfaces/Movie";
+import { getMovieFromContract } from "../utils/contract";
 
 export function ReviewPage() {
   const [rating, setRating] = useState(5);
+  const [currentMovie, setCurrentMovie] = useState<Movie | null>(null);
+    
   const { id } = useParams();
-  
-  let currentMovie: Movie = {id: '0', title: '', description: '', rating: 0, overallRating: 0};
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(!id) {
+        return;
+      }
+
+      setCurrentMovie(await getMovieFromContract(id));
+    };
+
+    fetchData();
+  }, [id]);
 
   return (
     <div>
       <div className="flex flex-col justify-center items-center mt-36">
-        <p>{currentMovie.title}</p>
-        <p>{currentMovie.description}</p>
-        <p>{currentMovie.rating}</p>
+        <p>{currentMovie?.title}</p>
+        <p>{currentMovie?.description}</p>
+        <p>{currentMovie?.rating}</p>
       </div>
 
       <div className="flex flex-col justify-center items-center">
