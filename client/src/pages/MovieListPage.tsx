@@ -1,11 +1,10 @@
 import { Movie } from "../interfaces/Movie";
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 export function MovieListPage() {
   const mockMovies: Movie[] = [
     {
       id: "1234",
-      rank: 1,
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
@@ -14,7 +13,6 @@ export function MovieListPage() {
     },
     {
       id: "5678",
-      rank:2,
       title: "Spiderman: Into The Spiderverse",
       description:
         "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
@@ -23,18 +21,17 @@ export function MovieListPage() {
     },
     {
       id: "1234",
-      rank: 3,
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      overallRating: 10,      
+      overallRating: 10,
       rating: 7,
     },
   ];
-  
+
   return (
     <>
-      <TableView data={mockMovies}/>
+      <TableView data={mockMovies} />
     </>
   );
 }
@@ -61,8 +58,13 @@ const TableView: FC<{ data: Movie[] }> = ({ data }) => {
         </thead>
         <tbody>
           {data.map((movie, index) => (
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
-              <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{movie.rank}</td>
+            <tr
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              key={index}
+            >
+              <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {index}
+              </td>
               <td className="py-4 px-6">{movie.title}</td>
               <td className="py-4 px-6">{movie.overallRating}</td>
               <td className="py-4 px-6">{movie.rating}</td>
