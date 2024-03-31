@@ -15,7 +15,6 @@ export function MovieListPage() {
       const reviewedMovies = await getReviewsFromContract(address)
 
       setReviewedMovies(reviewedMovies)
-      console.log(reviewedMovies)
     };
 
     fetchData();
