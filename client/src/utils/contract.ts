@@ -44,7 +44,7 @@ export async function getMovieFromContract(moveId: string): Promise<Movie> {
     return await contract.methods.getMovie(moveId).call()
 }
 
-export async function getAllMoviesFromContract() {
+export async function getAllMoviesFromContract(): Promise<Movie[]> {
     return await contract.methods.getAllMovies().call()
 }
 

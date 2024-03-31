@@ -27,6 +27,19 @@ contract User {
 		uint numberOfRatings;
 	}
 
+	constructor(){
+        addMovie("1", Movie("1", "The Shawshank Redemption", "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", 1994, 9, 2201412));
+        addMovie("2", Movie("2", "The Godfather", "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.", 1972, 9, 1533255));
+        addMovie("3", Movie("3", "The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", 2008, 9, 2199641));
+        addMovie("4", Movie("4", "12 Angry Men", "A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.", 1957, 8, 704034));
+        addMovie("5", Movie("5", "Schindler's List", "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.", 1993, 8, 1239929));
+    	addMovie("6", Movie("6", "The Lord of the Rings: The Return of the King", "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.", 2003, 8, 1710659));
+        addMovie("7", Movie("7", "Pulp Fiction", "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.", 1994, 8, 1895566));
+        addMovie("8", Movie("8", "The Good, the Bad and the Ugly", "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.", 1966, 8, 732864));
+        addMovie("9", Movie("9", "Forrest Gump", "The story of a man with a low IQ who accomplished great things in his life.", 1994, 8, 1671306));
+        addMovie("10", Movie("10", "Inception", "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.", 2010, 8, 2005113));
+	}
+
 	mapping (address => UserInfo) public wallets;
 	address[] addressArray;
 	mapping (string => Movie) public movies;

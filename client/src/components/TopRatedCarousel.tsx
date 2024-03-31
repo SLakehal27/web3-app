@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 
-export function TopRatedCarousel({ movies }: { movies: Movie[] }) {
+export function TopRatedCarousel({ movies }: { movies: Movie[] | null }) {
   return (
     <Carousel
       opts={{
@@ -19,7 +19,7 @@ export function TopRatedCarousel({ movies }: { movies: Movie[] }) {
       className="w-full max-w-xxl"
     >
       <CarouselContent>
-        {movies.map((movie: Movie, index: number) => (
+        {movies?.map((movie: Movie, index: number) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
             <Link to={`review/${movie.id}`}>
               <div className="p-1">
