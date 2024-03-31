@@ -32,7 +32,7 @@ export async function removeFromWatchlistFromContract(address: Address, idMovie:
     await contract.methods.removeFromWatchlist(address, idMovie).send({from: address})
 }
 
-export async function getReviewsFromContract(address: Address) {
+export async function getReviewsFromContract(address: Address): Promise<Movie[]> {
     return await contract.methods.getReviews(address).call({from: address})
 }
 

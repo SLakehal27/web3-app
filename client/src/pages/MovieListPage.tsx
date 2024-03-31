@@ -1,42 +1,61 @@
 import { Movie } from "../interfaces/Movie";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { getReviewsFromContract, web3 } from "../utils/contract";
+import { Address } from "web3";
 
 export function MovieListPage() {
-  const mockMovies: Movie[] = [
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      overallRating: 10,
-      rating: 9.8,
-    },
-    {
-      id: "5678",
-      title: "Spiderman: Into The Spiderverse",
-      description:
-        "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
-      overallRating: 10,
-      rating: 9.5,
-    },
-    {
-      id: "1234",
-      title: "Oppenheimer",
-      description:
-        "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-      overallRating: 10,
-      rating: 7,
-    },
-  ];
+  // const mockMovies: Movie[] = [
+  //   {
+  //     id: "1234",
+  //     title: "Oppenheimer",
+  //     description:
+  //       "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+  //     averageRating: 10,
+  //     rating: 9.8,
+  //   },
+  //   {
+  //     id: "5678",
+  //     title: "Spiderman: Into The Spiderverse",
+  //     description:
+  //       "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+  //     overallRating: 10,
+  //     rating: 9.5,
+  //   },
+  //   {
+  //     id: "1234",
+  //     title: "Oppenheimer",
+  //     description:
+  //       "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+  //     overallRating: 10,
+  //     rating: 7,
+  //   },
+  // ];
+
+  const [reviewedMovies, setReviewedMovies] = useState<Movie[] | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {      
+      const accounts = await web3.eth.getAccounts();
+      const address: Address = accounts[0];
+  
+      const reviewedMovies = await getReviewsFromContract(address)
+
+      setReviewedMovies(reviewedMovies)
+      console.log(reviewedMovies)
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <>
-      <TableView data={mockMovies} />
+      <TableView data={reviewedMovies} />
     </>
   );
 }
 
-const TableView: FC<{ data: Movie[] }> = ({ data }) => {
+const TableView: FC<{ data: Movie[] | null }> = ({ data }) => {
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -57,7 +76,7 @@ const TableView: FC<{ data: Movie[] }> = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((movie, index) => (
+          {data?.map((movie, index) => (
             <tr
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={index}
@@ -66,8 +85,8 @@ const TableView: FC<{ data: Movie[] }> = ({ data }) => {
                 {index + 1}
               </td>
               <td className="py-4 px-6">{movie.title}</td>
-              <td className="py-4 px-6">{movie.overallRating}</td>
-              <td className="py-4 px-6">{movie.rating}</td>
+              <td className="py-4 px-6">{movie.averageRating.toString()}</td>
+              <td className="py-4 px-6">{movie.rating.toString()}</td>
             </tr>
           ))}
         </tbody>
