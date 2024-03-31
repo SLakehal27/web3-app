@@ -21,6 +21,7 @@ import { MovieCard } from "../components/MovieCard";
 import { Movie } from "../interfaces/Movie";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Button } from "../components/ui/button";
 
 export function MainPage() {
   const setUsername = async () => {
@@ -84,9 +85,14 @@ export function MainPage() {
         <div className="grid grid-cols-5">
           {topRatedMovies?.map((movie, index) => {
             return (
-              <Link to={`review/${movie.id}`} key={index}>
-                <MovieCard movie={movie} />
-              </Link>
+              <div className="flex flex-col items-center">
+                <Link to={`review/${movie.id}`} key={index}>
+                  <MovieCard movie={movie} />
+                </Link>
+                <Button className="bg-indigo-500 hover:bg-indigo-800 hover:scale-110 transition">
+                  Remove from watch list
+                </Button>
+              </div>
             );
           })}
         </div>
