@@ -2,9 +2,22 @@ import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { Link, useParams } from "react-router-dom";
 import { Movie } from "../interfaces/Movie";
-import { getMovieFromContract } from "../utils/contract";
+import { addToWatchlistFromContract, getMovieFromContract, web3 } from "../utils/contract";
+import { Address } from "web3";
 
 export function ReviewPage() {
+
+  const addToWatchlist = async () => {
+    if(!id) {
+      return;
+    }
+
+    const accounts = await web3.eth.getAccounts();
+    const address: Address = accounts[0];
+
+    addToWatchlistFromContract(address, id);
+  };
+
   const [rating, setRating] = useState(5);
   const [currentMovie, setCurrentMovie] = useState<Movie | null>(null);
 
@@ -50,10 +63,12 @@ export function ReviewPage() {
               Add rating
             </Button>
           </Link>
-
-          <Button className="bg-indigo-500 w-48 text-lg hover:bg-indigo-800 hover:scale-110 transition">
-            Add to Watch List
-          </Button>
+          
+          <Link to="/">
+            <Button onClick={addToWatchlist} className="bg-indigo-500 w-48 text-lg hover:bg-indigo-800 hover:scale-110 transition">
+              Add to Watch List
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

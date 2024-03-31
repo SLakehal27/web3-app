@@ -60,7 +60,6 @@ contract User {
 	function addReview(address wallet, Review memory review) public {
 		UserInfo storage user = wallets[wallet];
 
-		// use revert instead?
 		for (uint i = 0; i < user.reviews.length; i++) {
             if (keccak256(bytes(user.reviews[i].idMovie)) == keccak256(bytes(review.idMovie))) {
                 return;
@@ -99,11 +98,29 @@ contract User {
         user.idMoviesToWatch.push(idMovie);
 	}
 
-	function getWatchlist(address wallet) public view returns(string[] memory) {
-		string[] memory watchlist = wallets[wallet].idMoviesToWatch;
-
-		return watchlist;
+	function removeFromWatchlist(address wallet, string memory idMovie) public {
+		UserInfo storage user = wallets[wallet];
+		for (uint i = 0; i < user.idMoviesToWatch.length; i++) {
+			if (keccak256(bytes(user.idMoviesToWatch[i])) == keccak256(bytes(idMovie))) {
+				user.idMoviesToWatch[i] = user.idMoviesToWatch[user.idMoviesToWatch.length - 1];
+				user.idMoviesToWatch.pop();
+				break;
+			}
+		}
 	}
+
+	function getWatchlist(address wallet) public view returns (Movie[] memory) {
+		UserInfo memory user = wallets[wallet];
+		uint256 watchlistLength = user.idMoviesToWatch.length;
+		Movie[] memory watchlist = new Movie[](watchlistLength);
+		
+		for (uint256 i = 0; i < watchlistLength; i++) {
+			watchlist[i] = movies[user.idMoviesToWatch[i]];
+		}
+
+    	return watchlist;
+	}
+
 
 	function getReviews(address wallet) public view returns(Review[] memory) {
 		Review[] memory reviews = wallets[wallet].reviews;
