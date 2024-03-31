@@ -28,8 +28,8 @@ contract User {
 	}
 
 	constructor() {
-        addMovie("1", Movie("1", "The Shawshank Redemption", "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", 1994, 9, 5));
-        addMovie("2", Movie("2", "The Godfather", "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.", 1972, 9, 1533255));
+        addMovie("1", Movie("1", "The Shawshank Redemption", "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", 1994, 10, 5));
+        addMovie("2", Movie("2", "The Godfather", "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.", 1972, 9, 10));
         addMovie("3", Movie("3", "The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", 2008, 9, 8));
         addMovie("4", Movie("4", "12 Angry Men", "A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.", 1957, 8, 3));
         addMovie("5", Movie("5", "Schindler's List", "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.", 1993, 8, 5));
@@ -138,19 +138,13 @@ contract User {
 	}
 
 	function getTopRated() public view returns(Movie[] memory){
-		Movie[] memory topRated;
-		uint totalRatings;
-        for (uint256 i = 0; i < idArray.length; i++) {
-            totalRatings += movies[idArray[i]].averageRating;
-        }
-		totalRatings /=	idArray.length;
-		for (uint256 i = 0; i < idArray.length; i++) {
-            if(totalRatings < movies[idArray[i]].averageRating){
-				topRated[i] = movies[idArray[i]];
-			}
-        }
-		return topRated;
+		Movie[] memory allMovies = getAllMovies();
+
+		quickSort(allMovies, int(0), int(allMovies.length - 1));
+
+		return allMovies;
 	}
+
 
 	function getAverageRating(string memory idMovie) public view returns(uint) {
 		uint averageRating = movies[idMovie].averageRating;
@@ -186,5 +180,23 @@ contract User {
 					break;
             }
         }
+	}
+
+	function quickSort(Movie[] memory arr, int left, int right) internal pure {
+		int i = left;
+		int j = right;
+		if (i == j) return;
+		uint pivot = arr[uint(left + (right - left) / 2)].averageRating;
+		while (i <= j) {
+			while (arr[uint(i)].averageRating > pivot) i++;
+			while (pivot > arr[uint(j)].averageRating) j--;
+			if (i <= j) {
+				(arr[uint(i)], arr[uint(j)]) = (arr[uint(j)], arr[uint(i)]);
+				i++;
+				j--;
+			}
+		}
+		if (left < j) quickSort(arr, left, j);
+		if (i < right) quickSort(arr, i, right);
 	}
 }
