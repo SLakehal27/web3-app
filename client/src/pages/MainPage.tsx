@@ -96,7 +96,7 @@ export function MainPage() {
     <>
       <div className="flex flex-col items-center p-20">
         <h1 className="font-bold text-3xl">Top rated movies!</h1>
-        <TopRatedCarousel movies={mockMovies} />;
+        <TopRatedCarousel movies={mockMovies} />
         <h1 className="font-bold text-3xl">Movies to watch!</h1>
         <div className="grid grid-cols-5">
           {mockMovies.map((movie) => {
