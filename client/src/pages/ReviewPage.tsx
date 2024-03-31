@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { useParams } from "react-router-dom";
+import { Movie } from "../interfaces/Movie";
 
 export function ReviewPage() {
   const [rating, setRating] = useState(5);
   const { id } = useParams();
-
-  useEffect(() => {
-    
-
-  }, []);
+  
+  let currentMovie: Movie = {id: '0', title: '', description: '', rating: 0, overallRating: 0};
 
   return (
     <div>
       <div className="flex flex-col justify-center items-center mt-36">
-        <p>Movie id : {id}</p>
-        <p>Movie Title</p>
-        <p>Description</p>
-        <p>Rating</p>
+        <p>{currentMovie.title}</p>
+        <p>{currentMovie.description}</p>
+        <p>{currentMovie.rating}</p>
       </div>
 
       <div className="flex flex-col justify-center items-center">
