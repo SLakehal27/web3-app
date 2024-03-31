@@ -65,7 +65,6 @@ export function MainPage() {
   const mockMovies: Movie[] = [
     {
       id: "1234",
-      rank: 1,
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
@@ -74,7 +73,6 @@ export function MainPage() {
     },
     {
       id: "5678",
-      rank:2,
       title: "Spiderman: Into The Spiderverse",
       description:
         "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
@@ -83,7 +81,6 @@ export function MainPage() {
     },
     {
       id: "1234",
-      rank: 3,
       title: "Oppenheimer",
       description:
         "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
