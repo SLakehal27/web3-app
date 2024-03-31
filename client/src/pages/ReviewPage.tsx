@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Movie } from "../interfaces/Movie";
 import { getMovieFromContract } from "../utils/contract";
 
@@ -24,8 +24,8 @@ export function ReviewPage() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mt-36">
-        <p>{currentMovie?.title}</p>
+      <div className="flex flex-col justify-center items-center mt-24 gap-5">
+        <p className="text-4xl font-bold">{currentMovie?.title}</p>
         <p>{currentMovie?.description}</p>
         <p>{currentMovie?.rating}</p>
       </div>
@@ -44,12 +44,14 @@ export function ReviewPage() {
           />
           <p>{rating}</p>
         </div>
-        <div className="flex flex-col gap-3">
-          <Button className="bg-indigo-500 hover:bg-indigo-800 hover:scale-110 transition">
-            Add rating
-          </Button>
+        <div className="flex gap-6 mt-5">
+          <Link to="/">
+            <Button className="bg-indigo-500 w-48 text-lg hover:bg-indigo-800 hover:scale-110 transition">
+              Add rating
+            </Button>
+          </Link>
 
-          <Button className="bg-indigo-500 hover:bg-indigo-800 hover:scale-110 transition">
+          <Button className="bg-indigo-500 w-48 text-lg hover:bg-indigo-800 hover:scale-110 transition">
             Add to Watch List
           </Button>
         </div>

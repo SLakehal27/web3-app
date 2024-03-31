@@ -10,7 +10,6 @@ export function MovieCard({ movie }: { movie: Movie }) {
         </CardHeader>
         <CardContent className="overflow-y-auto">
           <p>{movie.description}</p>
-          <p>Number of ppl</p>
         </CardContent>
         <CardFooter>
           <p>{movie.rating} </p>
