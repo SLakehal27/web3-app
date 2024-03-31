@@ -31,21 +31,20 @@ export function MainPage() {
     const address: Address = accounts[0];
 
     await removeFromWatchlistFromContract(address, id);
-    setWatchlist(await getWatchlistFromContract(address))
+    setWatchlist(await getWatchlistFromContract(address));
   };
 
   const [topRatedMovies, setTopRatedMovies] = useState<Movie[] | null>(null);
   const [watchlist, setWatchlist] = useState<Movie[] | null>(null);
 
-
   useEffect(() => {
     const fetchData = async () => {
       setTopRatedMovies(await getTopRatedFromContract());
-      
+
       const accounts = await web3.eth.getAccounts();
       const address: Address = accounts[0];
-  
-      setWatchlist(await getWatchlistFromContract(address))
+
+      setWatchlist(await getWatchlistFromContract(address));
     };
 
     fetchData();
@@ -61,11 +60,14 @@ export function MainPage() {
         <div className="grid grid-cols-5">
           {watchlist?.map((movie, index) => {
             return (
-              <div className="flex flex-col items-center">
-                <Link to={`review/${movie.id}`} key={index}>
+              <div className="flex flex-col items-center" key={index}>
+                <Link to={`review/${movie.id}`}>
                   <MovieCard movie={movie} />
                 </Link>
-                <Button onClick={async () => await removeFromWatchlist(movie.id)} className="bg-indigo-500 hover:bg-indigo-800 hover:scale-110 transition">
+                <Button
+                  onClick={async () => await removeFromWatchlist(movie.id)}
+                  className="bg-indigo-500 hover:bg-indigo-800 hover:scale-110 transition"
+                >
                   Remove from watch list
                 </Button>
               </div>
