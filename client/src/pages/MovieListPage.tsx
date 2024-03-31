@@ -2,35 +2,9 @@ import { Movie } from "../interfaces/Movie";
 import React, { FC, useEffect, useState } from "react";
 import { getReviewsFromContract, web3 } from "../utils/contract";
 import { Address } from "web3";
+import { Header } from "../components/Header";
 
 export function MovieListPage() {
-  // const mockMovies: Movie[] = [
-  //   {
-  //     id: "1234",
-  //     title: "Oppenheimer",
-  //     description:
-  //       "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-  //     averageRating: 10,
-  //     rating: 9.8,
-  //   },
-  //   {
-  //     id: "5678",
-  //     title: "Spiderman: Into The Spiderverse",
-  //     description:
-  //       "Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
-  //     overallRating: 10,
-  //     rating: 9.5,
-  //   },
-  //   {
-  //     id: "1234",
-  //     title: "Oppenheimer",
-  //     description:
-  //       "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
-  //     overallRating: 10,
-  //     rating: 7,
-  //   },
-  // ];
-
   const [reviewedMovies, setReviewedMovies] = useState<Movie[] | null>(null);
 
   useEffect(() => {
@@ -50,6 +24,7 @@ export function MovieListPage() {
 
   return (
     <>
+      <Header />
       <TableView data={reviewedMovies} />
     </>
   );

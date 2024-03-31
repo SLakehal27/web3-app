@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Movie } from "../interfaces/Movie";
 import { addReviewFromContract, addToWatchlistFromContract, getMovieFromContract, web3 } from "../utils/contract";
 import { Address } from "web3";
+import { Header } from "../components/Header";
 
 export function ReviewPage() {
 
@@ -55,6 +56,7 @@ export function ReviewPage() {
 
   return (
     <div>
+      <Header />
       <div className="flex flex-col justify-center items-center mt-24 gap-5">
         <p className="text-4xl font-bold">Average rating: {currentMovie?.averageRating.toString()}</p>
         <p className="text-4xl font-bold">{currentMovie?.title}</p>

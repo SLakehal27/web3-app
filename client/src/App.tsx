@@ -11,12 +11,11 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {window.location.pathname !== "/" ? <Header /> : <></>}
         <Routes>
           <Route path="/" element={<RegistrationPage />} />
           <Route path="/main" element={<MainPage />} />
-          <Route path="/review/:id" element={<ReviewPage />} />
-          <Route path="/movielist" element={<MovieListPage />} />
+          <Route path="/main/review/:id" element={<ReviewPage />} />
+          <Route path="/main/movielist" element={<MovieListPage />} />
         </Routes>
       </BrowserRouter>
     </>

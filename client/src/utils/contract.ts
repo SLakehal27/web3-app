@@ -12,7 +12,7 @@ export const contract = new web3.eth.Contract(
   contractAddress,
 )
 
-export async function getUsernameFromContract(address: Address) {
+export async function getUsernameFromContract(address: Address): Promise<string> {
     return await contract.methods.getUsername(address).call({from: address})
 }
 

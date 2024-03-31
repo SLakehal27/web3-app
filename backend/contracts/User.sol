@@ -72,8 +72,6 @@ contract User {
 	}
 
 	function addReview(address wallet, Review memory review) public {
-		addUser(wallet, 'mathieu');
-
 		UserInfo storage user = wallets[wallet];
 
 		for (uint i = 0; i < user.reviews.length; i++) {

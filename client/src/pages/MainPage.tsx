@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { watch } from "fs";
+import { Header } from "../components/Header";
 
 export function MainPage() {
   const removeFromWatchlist = async (id: string) => {
@@ -52,6 +53,7 @@ export function MainPage() {
 
   return (
     <>
+      <Header />
       <div className="flex flex-col items-center p-20">
         <h1 className="font-bold text-3xl">Top rated movies!</h1>
         <TopRatedCarousel movies={topRatedMovies} />
