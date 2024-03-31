@@ -21,6 +21,7 @@ import { MovieCard } from "../components/MovieCard";
 import { Movie } from "../interfaces/Movie";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { watch } from "fs";
 
 export function MainPage() {
   const setUsername = async () => {
@@ -66,10 +67,17 @@ export function MainPage() {
   };
 
   const [topRatedMovies, setTopRatedMovies] = useState<Movie[] | null>(null);
+  const [watchlist, setWatchlist] = useState<Movie[] | null>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
       setTopRatedMovies(await getTopRatedFromContract());
+      
+      const accounts = await web3.eth.getAccounts();
+      const address: Address = accounts[0];
+  
+      setWatchlist(await getWatchlistFromContract(address))
     };
 
     fetchData();
@@ -82,7 +90,7 @@ export function MainPage() {
         <TopRatedCarousel movies={topRatedMovies} />
         <h1 className="font-bold text-3xl">Movies to watch!</h1>
         <div className="grid grid-cols-5">
-          {topRatedMovies?.map((movie, index) => {
+          {watchlist?.map((movie, index) => {
             return (
               <Link to={`review/${movie.id}`} key={index}>
                 <MovieCard movie={movie} />

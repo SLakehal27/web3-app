@@ -20,12 +20,16 @@ export async function setUsernameFromContract(address: Address, username: string
     await contract.methods.addUser(address, username).send({from: address})
 }
 
-export async function getWatchlistFromContract(address: Address) {
+export async function getWatchlistFromContract(address: Address): Promise<Movie[]> {
     return await contract.methods.getWatchlist(address).call({from: address})
 }
 
 export async function addToWatchlistFromContract(address: Address, idMovie: string) {
     await contract.methods.addToWatchlist(address, idMovie).send({from: address})
+}
+
+export async function removeFromWatchlistFromContract(address: Address, idMovie: string) {
+    await contract.methods.removeFromWatchlist(address, idMovie).send({from: address})
 }
 
 export async function getReviewsFromContract(address: Address) {
